@@ -118,3 +118,6 @@ Route::get('/admin/coba_datatable', function () {
 Route::get('editImage/{id}',[AdminController::class,'editImage'])->name('editimage');
 Route::post('updateImage/{id}',[AdminController::class,'updateImage'])->name('updateImage');
 
+Route::get('regflow',function(){
+    return view('reg_flow.index');
+});

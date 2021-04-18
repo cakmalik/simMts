@@ -13,17 +13,25 @@
 
     @if ($std)
         @if ($std->role_id == 3)
-            <div class="alert alert-warning" role="alert">
-                Status pendaftaran : Menunggu verifikasi oleh admin
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong> Status Pendaftaran</strong>: Menunggu verifikasi
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <strong><u> JANGAN LUPA</u></strong><br> Cetak Biodata dan MoU di bawah ini dan dibawa saat Registrasi Ulang
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
         @else
             <div class="alert alert-success" role="alert">
                 Selamat, anda diterima sebagai siswa kelas : {{ $std->kelas }}
             </div>
         @endif
-        {{-- <div class="alert alert-success" role="alert">
-        Sebagai alumni :
-    </div> --}}
+
     @else
     @endif
 
@@ -31,16 +39,13 @@
 @stop
 @section('content')
     @include('sweet::alert')
+    <a href=" {{ URL::previous() }}" class="btn btn-default btn-sm mb-3"><i class="fas fa-arrow-left"></i></a>
+    <a href=" {{ route('cetakbiodata', $data->id) }}" class="btn btn-success btn-sm mb-3"><i class="fas fa-print"></i>
+        Cetak Biodata</a>
+    <a href=" {{ route('generatePDF_mou', $data->id) }}" class="btn btn-success btn-sm mb-3"><i class="fas fa-print"></i>
+        Cetak MoU</a>
     <div class="card">
         <div class="card-header ui-sortable-handle">
-            <h3 class="card-title">
-                <a href=" {{ URL::previous() }}" class="btn btn-default btn-sm"><i class="fas fa-arrow-left"></i></a>
-
-                <a href=" {{ route('cetakbiodata', $data->id) }}" class="btn btn-success btn-sm"><i
-                        class="fas fa-print"></i> Biodata</a>
-                <a href=" {{ route('generatePDF_mou', $data->id) }}" class="btn btn-success btn-sm"><i
-                        class="fas fa-print"></i> MoU</a>
-            </h3>
             <div class="card-tools">
                 <ul class="nav nav-pills ml-auto">
                     <li class="nav-item">
