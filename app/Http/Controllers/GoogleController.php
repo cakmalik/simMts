@@ -13,15 +13,21 @@ class GoogleController extends Controller
 {
     use RegistersUsers;
 
-   public function redirectToGoogle()
+    //pelajaran berharga dari error ini berkali kali malik, bahwa (stateless) = Setiap kali kita ingin mengakses program ini maka kita harus mengirim informasi username 
+
+    //sedangkan (statefull) tidak demikian, ia hanya menyimpan sekali dan menggunakan session untuk masuk lagi. tanpa perlu mengirim informasi username lagi 
+
+
+    public function redirectToGoogle()
     {
-        return Socialite::driver('google')
-        ->redirect();
+       return Socialite::driver('google')
+            ->stateless()
+            ->redirect();
     }
     public function handleGoogleCallback()
     {
         try {
-            $user = Socialite::driver('google')->user();
+            $user = Socialite::driver('google')->stateless()->user();
             $finduser = User::where('google_id',$user->getId())->first();
             if($finduser){
                 Auth::login($finduser);
@@ -37,7 +43,7 @@ class GoogleController extends Controller
                 ]);
                 $newuser->assignRole('calonsiswa');
                 Auth::login($newuser);
-                return redirect()->intended('step1');
+                return redirect()->route('step1');
             }
         } catch (\Throwable $th) {
             //throw $th;

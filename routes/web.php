@@ -2,16 +2,42 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\HomeController;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SuperController;
 use JeroenNoten\LaravelAdminLte\AdminLte;
-use App\Http\Controllers\GoogleController;
 // use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\CalonSiswaController;
 use App\Http\Controllers\CalonSantriController;
+
+Route::get('/cc', function () {
+    Artisan::call('cache:clear');
+    echo '<script>alert("cache clear Success")</script>';
+});
+Route::get('/ccc', function () {
+    Artisan::call('config:cache');
+    echo '<script>alert("config cache Success")</script>';
+});
+Route::get('/vc', function () {
+    Artisan::call('view:clear');
+    echo '<script>alert("view clear Success")</script>';
+});
+Route::get('/cr', function () {
+    Artisan::call('route:cache');
+    echo '<script>alert("route clear Success")</script>';
+});
+Route::get('/coc', function () {
+    Artisan::call('config:clear');
+    echo '<script>alert("config clear Success")</script>';
+});
+Route::get('/storage123', function () {
+    Artisan::call('storage:link');
+    echo '<script>alert("linked")</script>';
+});
 
 Route::get('/', function () {
     return view('welcome');
