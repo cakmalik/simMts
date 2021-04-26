@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
+use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -46,7 +49,7 @@ class LoginController extends Controller
             return redirect()->route('admin');
         }elseif($user->hasRole('calonsiswa')){
             return redirect()->route('siswa.biodata');
-        }elseif($user->hasRole('superadmin')){
+        }elseif($user->hasRole('super')){
             return redirect()->route('super');
         }elseif($user->hasRole('siswa')){
             return redirect()->route('calonsiswa');
@@ -55,4 +58,9 @@ class LoginController extends Controller
         }
         return redirect()->route('home');
     }
+
+   
+    
+
+    
 }

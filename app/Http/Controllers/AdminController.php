@@ -280,5 +280,11 @@ class AdminController extends Controller
         $data = Student::where('role_id', 4)->get();
         return view('admin.seluruh_siswa',compact('data'));
     }
+    public function getByJk($jk)
+    {
+        // dd($jk);
+        $data = Student::where(['jenis_kelamin'=>$jk,'role_id'=>4])->get();
+        return view('admin.seluruh_siswa',compact('data'));
+    }
 }
 

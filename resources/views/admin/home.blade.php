@@ -58,30 +58,28 @@ $pi = DB::table('students')
 
                 <!-- fix for small devices only -->
                 <div class="clearfix hidden-md-up"></div>
-
                 <div class="col-12 col-sm-6 col-md-6">
+                    <a href="{{ route('admin.get_by_jk','Laki-laki') }}">
                     <div class="info-box mb-3">
                         <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
-
                         <div class="info-box-content">
                             <span class="info-box-text text-dark">JUMLAH SISWA</span>
                             <span class="info-box-number">{{ $pa }}</span>
                         </div>
-
                     </div>
-
+                    </a>
                 </div>
 
                 <div class="col-12 col-sm-6 col-md-6">
+                    <a href="{{ route('admin.get_by_jk','Perempuan') }}">
                     <div class="info-box mb-3">
                         <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
-
                         <div class="info-box-content">
                             <span class="info-box-text text-dark">JUMLAH SISWI</span>
                             <span class="info-box-number">{{ $pi }}</span>
                         </div>
-
                     </div>
+                    </a>
 
                 </div>
 

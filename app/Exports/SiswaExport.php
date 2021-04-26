@@ -18,15 +18,15 @@ class SiswaExport implements FromQuery, WithMapping, WithHeadings
         return Student::where('role_id',4);
     }
 
-    public function map($siswa): array
+     public function map($siswa): array
     {
         return [
             $siswa->nis,
             $siswa->email,
             $siswa->nama_lengkap,
-            $siswa->nisn,
-            $siswa->nik,
-            $siswa->kk,
+            '`'.$siswa->nisn,
+            '`'.$siswa->nik,
+            '`'.$siswa->kk,
             $siswa->tempat_lahir,
             date('d F Y', strtotime($siswa->tanggal_lahir)),
             $siswa->jenis_kelamin,
@@ -36,14 +36,14 @@ class SiswaExport implements FromQuery, WithMapping, WithHeadings
             $siswa->kota,
             $siswa->provinsi,
             $siswa->kode_pos,
-            $siswa->no_hp,
+            '`'.$siswa->no_hp,
             $siswa->hobi,
             $siswa->cita_cita,
             
             $siswa->asal_sekolah,
             $siswa->npsn_sekolah,
             $siswa->alamat_sekolah_asal,
-            $siswa->no_un,
+            '`'.$siswa->no_un,
             $siswa->no_seri_ijazah,
             $siswa->no_skhun,
             $siswa->prestasi,
@@ -52,22 +52,22 @@ class SiswaExport implements FromQuery, WithMapping, WithHeadings
             $siswa->status_keluarga,
             $siswa->anak_ke,
             $siswa->nama_ayah,
-            $siswa->nik_ayah,
+            '`'.$siswa->nik_ayah,
             $siswa->tempatlahir_ayah,
             date('d F Y', strtotime($siswa->tanggallahir_ayah)),
             $siswa->pendidikan_ayah,
             $siswa->pekerjaan_ayah,
             $siswa->nama_ibu,
-            $siswa->nik_ibu,
+            '`'.$siswa->nik_ibu,
             $siswa->tempatlahir_ibu,
             date('d F Y', strtotime($siswa->tanggallahir_ibu)),
             $siswa->pendidikan_ibu,
             $siswa->pekerjaan_ibu,
             $siswa->penghasilan,
             
-            $siswa->no_pkh,
-            $siswa->no_kks_kps,
-            $siswa->no_kip,
+            '`'.$siswa->no_pkh,
+            '`'.$siswa->no_kks_kps,
+            '`'.$siswa->no_kip,
 
             $siswa->kelas,
         ];

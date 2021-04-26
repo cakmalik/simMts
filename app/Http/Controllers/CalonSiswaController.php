@@ -170,12 +170,18 @@ class CalonSiswaController extends Controller
     {
         $email = Auth::user()->email;
         $data = Student::where('email',$email)->first();
-        $role = (int)Malik::cekRoleId();
+        try{
+            $role = (int)Malik::cekRoleId();
+        }catch (\Throwable $th) {
+            //throw $th;
+            $role = 3; 
+        }
+        
         $title = 'Konfirmasi data';
         if($data){
             return view('admin.detail_siswa',compact('data','role','title'));
         }else{
-            echo 'data tidak ditemukan';
+            return redirect()->route('step1');
         }
     }
 }

@@ -1,68 +1,40 @@
+
 @extends('adminlte::page')
 
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <div class="d-flex justify-content-between">
-        <div>
-            <h4>Siswa {{ $tahun }}</h4>
-            <a href="{{ route('excel_siswa_tahun', $tahun) }}">Export Excel</a>
-
-        </div>
-        <form action="{{ route('siswa_tahun') }}" method="POST">
-            <div class="row">
-                <div class="col-6">
-                    @csrf
-                    <div class="form-group">
-                        <select name="tahun" class="form-control">
-                            {{ $first = 2019 }}
-                            {{ $now = date('Y') }}
-                            <option selected>Pilih</option>
-                            @for ($i = $now; $i >= $first; $i--)
-                                <option value="{{ $i }}">{{ $i }}</option>
-                            @endfor
-                        </select>
-                    </div>
-                </div>
-                <div class="col-3 mb-3">
-                    <button class="btn btn-primary" type="submit">Terapkan</button>
-                </div>
-            </div>
-        </form>
-    </div>
+    <h4>Akun siswa</h4>
 @stop
 
 @section('content')
     <div class="container">
         <div class="row">
-
             <div class="table-responsive">
                 <div class="table table-bordered table-striped">
-                    <table id="example" class="table table-bordered table-striped" style="width:80%">
+                    <table id="example" class="table table-bordered table-striped" style="width:100%">
                         <thead>
                             <tr>
-                                <th>No</th>
                                 <th>Nama</th>
-                                <th>NISN</th>
-                                <th>Kota</th>
-                                <th>Orang tua</th>
-                                <th>Aksi</th>
+                                <th>Email</th>
+                                <th>aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($data as $std)
+                            @foreach ($data as $user)
                                 <tr>
-                                    <td style="width: 1px">{{ $loop->iteration }}</td>
-                                    <td>{{ $std->nama_lengkap }}</td>
-                                    <td>{{ $std->nisn }}</td>
-                                    <td>{{ $std->kota }}</td>
-                                    <td>{{ $std->nama_ayah }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
                                     <td>
-                                        <a class='btn btn-sm btn-warning' href='{{ route('siswa_detail', $std->id) }}'><i
-                                                class='fas fa-search-plus'></i>
-                                        </a>
-                                        <a class='btn btn-sm btn-warning' href='{{ route('siswa_edit', $std->id) }}'><i
-                                                class='fas fa-edit'></i></a>
+                                       <form action="{{ route('user.destroy',$user->id) }}" method="POST">
+
+                    {{-- <a class="btn btn-info btn-sm" href="{{ route('posts.show',$post->id) }}">Show</a>
+                    <a class="btn btn-primary btn-sm" href="{{ route('posts.edit',$post->id) }}">Edit</a>
+  --}}
+                    @csrf
+                    @method('DELETE') 
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini? (dampak = siswa tidak akan dapat menggunakan lagi akunnya)')">Hapus</button>
+                </form>
                                     </td>
                                 </tr>
                             @endforeach
@@ -99,7 +71,7 @@
             $('#example thead tr').clone(true).appendTo('#example thead');
             $('#example thead tr:eq(1) th').each(function(i) {
                 var title = $(this).text();
-                $(this).html('<input type="text" />');
+                $(this).html('<input type="text" placeholder="" />');
 
                 $('input', this).on('keyup change', function() {
                     if (table.column(i).search() !== this.value) {
@@ -109,13 +81,13 @@
                             .draw();
                     }
                 });
+
             });
 
             var table = $('#example').DataTable({
                 orderCellsTop: true,
                 fixedHeader: true
             });
-
         });
 
     </script>

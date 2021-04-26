@@ -3,14 +3,20 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SuperController;
+use JeroenNoten\LaravelAdminLte\AdminLte;
+use App\Http\Controllers\GoogleController;
+// use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\CalonSiswaController;
 use App\Http\Controllers\CalonSantriController;
-use JeroenNoten\LaravelAdminLte\AdminLte;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
 
 Auth::routes();
 
@@ -45,6 +51,21 @@ Route::middleware('role:calonsiswa')->group(function () {
     
 });
 
+// ROUTE UNTUK SUPER ADMIN
+Route::middleware('role:super')->group(function () {
+    route::prefix('super')->group(function(){
+        route::get('/', function(){
+            return view('super.home');
+        })->name('super');
+        route::get('db_setting',[SuperController::class,'getDbSetting'])->name('super.dbset');
+        // route::get('dbset_edit/{id}',[SuperController::class,'dbSetEdit'])->name('super.dbset_edit');
+        route::post('update_dbset/{id}',[SuperController::class,'updateDbSet'])->name('super.update_dbset');
+
+        route::get('user_setting',[SuperController::class,'getUsers'])->name('super.users');
+        route::delete('delete/{user}',[SuperController::class,'hapusUser'])->name('user.destroy');
+    });
+});
+
 // ROUTE UNTUK ADMIN
 Route::middleware('role:admin')->group(function () {
     Route::prefix('admin')->group(function () {
@@ -76,6 +97,7 @@ Route::middleware('role:admin')->group(function () {
         route::get('excel_siswa_tahun/{tahun}',[AdminController::class,'excelTahun'])->name('excel_siswa_tahun');
 
         Route::get('seluruh_data',[AdminController::class,'seluruhSiswa'])->name('seluruh_siswa');
+        Route::get('jk/{jk}',[AdminController::class,'getByJk'])->name('admin.get_by_jk');
     });
 });
 
@@ -98,18 +120,12 @@ Route::middleware('role:calonsiswa|siswa')->group(function () {
     });
 });
 
-Route::middleware('role:super')->group(function () {
-    route::prefix('super')->group(function(){
-        route::get('/', function(){
-            return view('super.home');
-        });
-    });
-});
+
 Route::get('mou',function(){
     return view('admin.dokumen.mou');
 });
  Route::get('/cetakbiodata/{id}',[AdminController::class,'generatePDF_biodata'])->name('cetakbiodata');
- route::get('/generatePDF_mou/{id}',[AdminController::class,'generatePDF_mou'])->name('generatePDF_mou');
+//  route::get('/generatePDF_mou/{id}',[AdminController::class,'generatePDF_mou'])->name('generatePDF_mou');
 
 Route::get('/admin/coba_datatable', function () {
     return view('coba_datatable');
@@ -121,3 +137,18 @@ Route::post('updateImage/{id}',[AdminController::class,'updateImage'])->name('up
 Route::get('regflow',function(){
     return view('reg_flow.index');
 });
+
+
+//Login Google
+Route::get('auth/google',[GoogleController::class,'redirectToGoogle'])->name('masuk.google');
+Route::get('auth/google/callback',[GoogleController::class,'handleGoogleCallback']);
+
+Route::get('auth/facebook',[FacebookController::class,'redirectToFacebook'])->name('masuk.facebook');
+Route::get('auth/facebook/callback',[FacebookController::class,'handleFacebookCallback']);
+
+
+
+// Route::get('auth/google/callback', function () {
+ 
+//     // $user->token
+// });

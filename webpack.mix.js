@@ -13,7 +13,8 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .vue()
-    .sass('resources/sass/app.scss', 'public/css');
+    .sass('resources/sass/app.scss', 'public/css')
+    .sass('resources/assets/sass/error_page.scss', 'public/css');
 
 // mix.setPublicPath('public');
 // mix.js('resources/js/app.js', 'js');
