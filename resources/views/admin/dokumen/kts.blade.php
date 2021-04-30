@@ -112,19 +112,54 @@
     <a id="btn-Convert-Html2Image" href="#">Download</a>
     <br />
     <br>
+
+
+    <?php
+function tgl_indo($tanggal){
+	$bulan = array (
+		1 =>   'Januari',
+		'Februari',
+		'Maret',
+		'April',
+		'Mei',
+		'Juni',
+		'Juli',
+		'Agustus',
+		'September',
+		'Oktober',
+		'November',
+		'Desember'
+	);
+	$pecahkan = explode('-', $tanggal);
+	
+	// variabel pecahkan 0 = tanggal
+	// variabel pecahkan 1 = bulan
+	// variabel pecahkan 2 = tahun
+ 
+	return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
+}
+ 
+?>
+
+
 @php
             $tgl = date('d M Y');
+            $tgllhr = date('d M Y', strtotime($data->tanggal_lahir));
         @endphp
     {{-- DISINI KONTENNYA --}}
     <div id="html-content-holder" style="background-image:url('{{url('assets/img/kts-depan.png')}}'); width: 3000px;height: 1893px;">
         <div id="left-panel">
           <img src="{{url('Foto/Siswa/'.$data->foto_siswa)}}" id="fotosiswa">
         </div>
+
+        @php
+            $kota = explode(" ",$data->kota);
+        @endphp
         <div id="right-panel">
-            <p class="nis">{{$data->nis}}</p>
+            <p class="nis">{{$data->nis .' / '. $data->nisn}}</p>
             <p class="nama">{{$data->nama_lengkap}}</p>
-            <p class="ttl">{{$data->tempat_lahir.', '.$data->tanggal_lahir}}</p>
-            <p class="ttl">{{$data->desa.' - '.$data->kecamatan.' - '.$data->kota}}</p>
+            <p class="ttl">{{$data->tempat_lahir.', '.tgl_indo($data->tanggal_lahir)}}</p>
+            <p class="ttl" style="text-transform: uppercase;">{{$data->desa.' - '.$data->kecamatan.' - '.$kota[0]}}</p>
         </div>
         <div id="tgl-panel">
             <p class="tgl">Lumajang, {{$tgl}}</p>
