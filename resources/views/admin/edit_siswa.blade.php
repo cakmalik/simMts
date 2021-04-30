@@ -262,9 +262,16 @@
                             </div>
                             <div class="col-md">
                                 <div class="form-group">
-                                    <label for="no_kip">Kelas</label>
+                                    <label for="kelas">Kelas</label>
                                     <input type="text" name="kelas" value="{{ $student->kelas }}" class="form-control"
                                         id="kelas" aria-describedby="kelas" placeholder="kelas">
+                                </div>
+                            </div>
+                            <div class="col-md">
+                                <div class="form-group">
+                                    <label for="email">Email (Harap hati2 jika mengganti ini !)</label>
+                                    <input type="email" name="email" value="{{ $student->email }}" class="form-control"
+                                        id="email" aria-describedby="email" placeholder="email">
                                 </div>
                             </div>
                             <div class="text-right mb-6">

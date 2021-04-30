@@ -29,8 +29,8 @@
                                        <form action="{{ route('user.destroy',$user->id) }}" method="POST">
 
                     {{-- <a class="btn btn-info btn-sm" href="{{ route('posts.show',$post->id) }}">Show</a>
-                    <a class="btn btn-primary btn-sm" href="{{ route('posts.edit',$post->id) }}">Edit</a>
-  --}}
+                    --}}
+                    <a class="btn btn-primary btn-sm" href="{{ route('super.edituser',$user->id) }}">Edit</a>
                     @csrf
                     @method('DELETE') 
                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini? (dampak = siswa tidak akan dapat menggunakan lagi akunnya)')">Hapus</button>

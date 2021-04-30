@@ -3,12 +3,13 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\CobaController;
 use App\Http\Controllers\HomeController;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SuperController;
-use JeroenNoten\LaravelAdminLte\AdminLte;
 // use App\Http\Controllers\Auth\LoginController;
+use JeroenNoten\LaravelAdminLte\AdminLte;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\CalonSiswaController;
@@ -88,6 +89,8 @@ Route::middleware('role:super')->group(function () {
         route::post('update_dbset/{id}',[SuperController::class,'updateDbSet'])->name('super.update_dbset');
 
         route::get('user_setting',[SuperController::class,'getUsers'])->name('super.users');
+        route::get('edituser/{id}',[SuperController::class,'editUser'])->name('super.edituser');
+        route::put('edituser/{id}',[SuperController::class,'updateuser'])->name('super.updateuser');
         route::delete('delete/{user}',[SuperController::class,'hapusUser'])->name('user.destroy');
     });
 });
@@ -121,14 +124,16 @@ Route::middleware('role:admin')->group(function () {
 
         route::get('excel_siswa_kelas/{kelas}',[AdminController::class,'excelKelas'])->name('excel_siswa_kelas');
         route::get('excel_siswa_tahun/{tahun}',[AdminController::class,'excelTahun'])->name('excel_siswa_tahun');
+        route::get('cetak_kts/{id}',[AdminController::class,'cetakKts'])->name('cetak_kts');
 
         Route::get('seluruh_data',[AdminController::class,'seluruhSiswa'])->name('seluruh_siswa');
         Route::get('jk/{jk}',[AdminController::class,'getByJk'])->name('admin.get_by_jk');
+
     });
 });
 
 // ROUTE UNTUK CALONSISWA
-Route::middleware('role:calonsiswa|siswa')->group(function () {
+Route::middleware('role:calonsiswa|siswa|admin')->group(function () {
     Route::prefix('calonsiswa')->group(function () {
         // Route::get('/',[CalonSiswaController::class,'home'])->name('calonsiswa');
         Route::get('/', function(){
@@ -173,8 +178,9 @@ Route::get('auth/facebook',[FacebookController::class,'redirectToFacebook'])->na
 Route::get('auth/facebook/callback',[FacebookController::class,'handleFacebookCallback']);
 
 
-
-// Route::get('auth/google/callback', function () {
- 
-//     // $user->token
-// });
+//coba
+Route::get('print',[CobaController::class,'print']);
+Route::get('coba',function()
+{
+    return view('admin.dokumen.coba');
+});

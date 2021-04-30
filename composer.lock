@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "02b0691969c3e9b60c5de52836769950",
+    "content-hash": "764dec6c75af32cafec73076b94a172a",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -48,6 +48,69 @@
                 "source": "https://github.com/ColorlibHQ/AdminLTE/tree/v3.0.5"
             },
             "time": "2020-05-19T20:41:11+00:00"
+        },
+        {
+            "name": "anam/phantommagick",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/anam-hossain/phantommagick.git",
+                "reference": "7da1cb92198717e5aba7a4a8c9b8eb61c3ae12eb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/anam-hossain/phantommagick/zipball/7da1cb92198717e5aba7a4a8c9b8eb61c3ae12eb",
+                "reference": "7da1cb92198717e5aba7a4a8c9b8eb61c3ae12eb",
+                "shasum": ""
+            },
+            "require": {
+                "league/flysystem": "~1.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Anam\\PhantomMagick\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anam hossain",
+                    "email": "enam33@gmail.com"
+                }
+            ],
+            "description": "PhantomMagick provides a simple API to ease the process of converting HTML to PDF or images",
+            "homepage": "https://github.com/anam-hossain/phantommagick",
+            "keywords": [
+                "Html 2 jpg",
+                "Html 2 pdf",
+                "Laravel pdf",
+                "Phantom",
+                "Screen capture",
+                "converter",
+                "html to image",
+                "html to pdf",
+                "html to png",
+                "image converter",
+                "invoice",
+                "laravel",
+                "pdf",
+                "pdf converter",
+                "phantomjs"
+            ],
+            "support": {
+                "issues": "https://github.com/anam-hossain/phantommagick/issues",
+                "source": "https://github.com/anam-hossain/phantommagick/tree/master"
+            },
+            "time": "2017-08-07T09:06:12+00:00"
         },
         {
             "name": "asm89/stack-cors",

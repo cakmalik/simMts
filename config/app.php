@@ -183,6 +183,8 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         App\Providers\DatabaseConfigProvider::class,
 
+        Anam\PhantomMagick\ConverterServiceProvider::class,
+
 
     ],
 
@@ -241,6 +243,7 @@ return [
         'Alert'=>UxWeb\SweetAlert\SweetAlertServiceProvider::class,
         'MalikHelp' => App\Helpers\Malik::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Converter' => Anam\PhantomMagick\Facades\Converter::class,
     ],
 
 ];

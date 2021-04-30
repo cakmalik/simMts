@@ -39,7 +39,7 @@ class MenuSeeder extends Seeder
                 'role_id'=>'1',
             ],
             [
-                'name'=>'User setting',
+                'name'=>'Users',
                 'url'=>'/super/user_setting',
                 'icon'=>'fas fa-user-cog',
                 'icon_color'=>'text-success',

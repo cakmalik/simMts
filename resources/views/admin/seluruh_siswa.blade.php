@@ -31,6 +31,8 @@
                                     <td>{{ $std->nama_ayah }}</td>
                                     <td>{{ $std->nisn }}</td>
                                     <td>
+                                        <a class='btn btn-sm btn-warning' href='{{ route('cetak_kts', $std->id) }}'>KTS
+                                        </a>
                                         <a class='btn btn-sm btn-warning' href='{{ route('siswa_detail', $std->id) }}'><i
                                                 class='fas fa-search-plus'></i>
                                         </a>

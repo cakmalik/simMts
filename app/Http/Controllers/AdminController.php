@@ -275,6 +275,11 @@ class AdminController extends Controller
     {
         return Excel::download(new TahunExport($tahun), 'siswa.xlsx');
     }
+    function cetakKts($id)
+    {
+        $data = Student::find($id);
+        return view('admin.dokumen.kts',compact('data'));
+    }
     function seluruhSiswa()
     {
         $data = Student::where('role_id', 4)->get();
